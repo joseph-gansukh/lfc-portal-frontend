@@ -15,6 +15,7 @@ export default class Home extends Component {
 
   handleLogoutClick() {
     axios.delete('https://lfc-portal-api.herokuapp.com/logout', {withCredentials: true})
+    // axios.delete('http://localhost:3000/logout', {withCredentials: true})
     .then(resp => {
       this.props.handleLogout()
     }).catch(error => {

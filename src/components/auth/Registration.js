@@ -30,6 +30,7 @@ export default class Registration extends Component {
     } = this.state
 
     axios.post("https://lfc-portal-api.herokuapp.com/registrations", {
+    // axios.post("http://localhost:3000/registrations", {
       user: {
         email: email, 
         password: password,

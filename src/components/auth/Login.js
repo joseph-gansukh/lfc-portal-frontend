@@ -28,6 +28,7 @@ export default class Login extends Component {
     } = this.state
 
     axios.post("https://lfc-portal-api.herokuapp.com/sessions", {
+    // axios.post("http://localhost:3000/sessions", {
       user: {
         email: email, 
         password: password
