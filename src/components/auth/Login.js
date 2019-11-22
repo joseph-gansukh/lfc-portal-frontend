@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 
-export default class Registration extends Component {
+export default class Login extends Component {
 
   constructor(props) {
     super(props)
@@ -9,8 +9,7 @@ export default class Registration extends Component {
     this.state = {
       email: "",
       password: "", 
-      password_confirmation: "", 
-      registrationErrors: ""
+      loginErrors: ""
     }
   }
 
@@ -25,24 +24,22 @@ export default class Registration extends Component {
 
     const {
       email, 
-      password, 
-      password_confirmation
+      password
     } = this.state
 
-    axios.post("https://lfc-portal-api.herokuapp.com/registrations", {
+    axios.post("https://lfc-portal-api.herokuapp.com/sessions", {
       user: {
         email: email, 
-        password: password,
-        password_confirmation: password_confirmation
+        password: password
       }
     }, 
     { withCredentials: true }
     ).then(resp => {
-      if (resp.data.status === 'created') {
+      if (resp.data.logged_in) {
         this.props.handleSuccessfulAuth(resp.data)
       }
     }).catch(error => {
-      console.log('---registration error', error)
+      console.log('---login error', error)
     })
     e.preventDefault()
   }
@@ -53,7 +50,6 @@ export default class Registration extends Component {
         <form onSubmit={this.handleSubmit}>
           <input type="email" name="email" placeholder="Email" value={this.state.email} onChange={this.handleChange} required/>
           <input type="password" name="password" placeholder="Password" value={this.state.password} onChange={this.handleChange} required/>
-          <input type="password" name="password_confirmation" placeholder="Password Confirmation" value={this.state.password_confirmation} onChange={this.handleChange} required/>
           <button type="submit">Register</button>
         </form>
       </div>
